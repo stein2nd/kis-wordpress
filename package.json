@@ -1,0 +1,24 @@
+{
+  "name": "kis-wordpress",
+  "version": "0.0.1",
+  "description": "KIS WordPress plugin monorepo",
+  "license": "GPL-3.0-or-later",
+  "author": "Koutarou ISHIKAWA",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stein2nd/kis-wordpress.git"
+  },
+  "homepage": "https://github.com/stein2nd/kis-wordpress#readme",
+  "bugs": {
+    "url": "https://github.com/stein2nd/kis-wordpress/issues"
+  },
+  "scripts": {
+    "lint:docs": "s2j-docs-linter ./README.md ./CHANGELOG.md ./docs/**/*.md ./docs_mod/**/*.md"
+  },
+  "allowScripts": {
+    "@s2j/docs-linter": true
+  },
+  "devDependencies": {
+    "@s2j/docs-linter": "^1.0.23"
+  }
+}
