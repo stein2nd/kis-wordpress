@@ -1,6 +1,6 @@
 {
   "name": "kis-wordpress",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "KIS WordPress plugin monorepo",
   "license": "GPL-3.0-or-later",
   "author": "Koutarou ISHIKAWA",
@@ -19,6 +19,6 @@
     "@s2j/docs-linter": true
   },
   "devDependencies": {
-    "@s2j/docs-linter": "^1.0.23"
+    "@s2j/docs-linter": "^1.0.25"
   }
 }
