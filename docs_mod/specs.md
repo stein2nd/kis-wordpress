@@ -79,7 +79,7 @@ flowchart TD
 | --- | --- |
 | [関連リポジトリ](#関連リポジトリ) | 本モノレポ / 別 repo / 既存 S2J の地図 |
 | [プラグイン一覧と責務](#プラグイン一覧と責務) | CPT、データモデル、Phase |
-| [横断機能 (kis-core + サービス)](#横断機能-kis-core--サービス) | 更新日、pin 優先 Query、SaaS 送信 |
+| [横断機能 (S2J プロダクト)](#横断機能-s2j-プロダクト) | 更新日、ピン優先 Query、SaaS 送信 |
 | [フェーズロードマップ](#フェーズロードマップ) | Phase-0〜5と repo split |
 
 ## 関連リポジトリ
@@ -92,7 +92,7 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 
 | プラグイン | 担当 | Phase |
 | --- | --- | --- |
-| **kis-core** | 共通基盤 (CPT 移管、更新日、Template Debug、Query ブロック等) | 0 |
+| **kis-core** | 共通基盤 (CPT 移管、Template Debug) | 0 |
 | **kis-inquiry** | 問い合わせ・資料請求 (Snow Monkey Forms、SaaS 送信) | 0〜2 |
 | **kis-case** | 導入事例 | 1 |
 | **kis-corporate** | 会社情報 | 1 |
@@ -103,14 +103,14 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 
 ### 別リポジトリ (汎用・サービス)
 
-横断ロジックは当面 `packages/` に仮置きし、2プラグイン以上で共用開始後に各 `s2j-*-service` へ split する (Phase-5前後)。`s2j-legal` は最初から別 repo。詳細は [横断機能 (kis-core + サービス)](#横断機能-kis-core--サービス)。
+横断機能の Composer ライブラリは **S2J プロダクトとして別 repo** に切り出しました。仕様の正は各 repo の `docs_mod/service_spec.md` です。次は各サービスの仕様確定と実装、その後に呼び出し側プラグインの仕様です。`s2j-legal` は最初から別 repo です。詳細は [横断機能 (S2J プロダクト)](#横断機能-s2j-プロダクト)。
 
 | 名称 | 種別 | リポジトリ | 備考 | 状態 |
 | --- | --- | --- | --- | --- |
 | **S2J Legal** | WP プラグイン | [s2j-legal](https://github.com/stein2nd/s2j-legal.git) | 個人情報・情報セキュリティ等 (法務) | 空 repo |
-| **post-dates-service** | Composer サービス | [s2j-post-dates-service](https://github.com/stein2nd/s2j-post-dates-service.git) | 公開日・更新日の表示ロジック。当面 `packages/post-dates-service/` | 空 repo |
-| **query-pinned-service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | pin 優先 + 残り N 件の並べ替え (WP 非依存)。当面 `packages/query-pinned-service/` | 空 repo |
-| **inquiry-destination-service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 問い合わせ SaaS アダプタ。当面 `packages/inquiry-destination-service/` | 空 repo |
+| **S2J Content Dates Service** | Composer サービス | [s2j-content-dates-service](https://github.com/stein2nd/s2j-content-dates-service.git) | 公開日・更新日の算出。呼び出し側は S2J Content Dates (プラグイン、未着手) | 仕様ドラフト |
+| **S2J Query Pinned Service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | ピン優先 + 残り N 件の組立。呼び出し側は S2J Query Pinned (プラグイン、未着手) | 仕様ドラフト |
+| **S2J Inquiry Destination Service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 問い合わせ送信先のコンセント変換。呼び出し側は S2J Inquiry Destination (プラグイン、未着手) | 仕様ドラフト |
 | **s2j-◯◯◯◯** (仮) | WP プラグイン | (未作成) | [GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク系イベント ([kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) 後継) | 未作成 |
 
 ### 既存 S2J プラグイン (連携)
@@ -150,7 +150,7 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 flowchart TB
     A1["kis2026_base<br />テーマ<br />templates/　parts/　patterns/　theme.json　styles"]
     A2["kis-wordpress<br />プラグイン モノレポ<br />kis-core, kis-case, kis-products, kis-inquiry, …"]
-    A3["サービス・ライブラリ<br />WordPress 非依存<br />s2j/post-dates-service<br />s2j/query-pinned-service<br />s2j/inquiry-destination-service"]
+    A3["サービス・ライブラリ<br />WordPress 非依存<br />s2j/content-dates-service<br />s2j/query-pinned-service<br />s2j/inquiry-destination-service"]
 
     A1 --> B1["見た目・レイアウトのみ"]
     A1 -->|template / block rendering| A2
@@ -158,7 +158,7 @@ flowchart TB
     A2 --> B2["CPT, ブロック, 管理 UI, WP フック (副作用はここに集約)"]
     A2 -->|composer require| A3
 
-    A3 --> B3["純粋ロジック・単体テスト可能 (関数型スタイル推奨)"]
+    A3 --> B3["純粋ロジック・ユニットテスト可能 (関数型スタイル推奨)"]
     A3 --> A4["WordPress DB"]
     A3 --> A5["外部 SaaS"]
 ```
@@ -182,11 +182,7 @@ kis-wordpress/
 │├── kis-products/            # Phase-1
 │├── kis-reason/              # Phase-1
 │└── kis-inquiry/             # Phase-0 骨格 → Phase-2 完成
-├┬─ packages/                      # サービス実装の仮置き (後日 *-service repo に)
-│├── post-dates-service/
-│├── query-pinned-service/
-│└── inquiry-destination-service/
-├── composer.json                  # 開発ツール + path リポジトリ
+├── composer.json                  # 開発ツール。プラグインは s2j/*-service を require
 └── README.md
 ```
 
@@ -237,38 +233,45 @@ product (親: Forwarder-PRO 等)
 更新頻度が低く **レイアウト編集が主目的** のコンテンツは、FSE の **固定ページ + ブロックパターン** も選択肢。  
 ただし KIS サイトでは **テーマ非依存** のため、上表のとおり多くを専用プラグイン CPT で持つ方針。
 
-## 横断機能 (kis-core + サービス)
+## 横断機能 (S2J プロダクト)
+
+日付・ピン留め・問い合わせ送信は kis-core に抱え込まず、**Composer ライブラリ + 呼び出し側 WP プラグイン** として切り出します。KIS サイトはそれらを require / 有効化します。
+
+次の順で進めます。各サービスの仕様検討 → 実装 → 呼び出し側プラグインの仕様検討。
 
 ### 更新日の見える化 (created + modified)
 
-**全プラグイン / s2j-legal / 将来の s2j-◯◯◯◯ 共通。**
+**全プラグイン / s2j-legal / 将来の s2j-◯◯◯◯ で利用しうる横断機能。**
+
+仕様の正: [S2J Content Dates Service](https://github.com/stein2nd/s2j-content-dates-service/blob/main/docs_mod/service_spec.md)
 
 | 要素 | 内容 |
 | --- | --- |
-| メタ | `_kis_show_modified` (bool、デフォルト `true`) |
-| サービス | `s2j/post-dates-service` |
-| ヘルパー | 公開日・更新日の計算、表示フォーマット (WP 非依存) |
-| ブロック |「KIS 更新情報」—「公開: YYYY/MM/DD」「更新: YYYY/MM/DD」 |
-| 製品親 CPT | 子 `product_section` の `max(post_modified)` を親に集約 |
-
-**実装順:** Phase-0は `packages/post-dates-service/` →2プラグイン以上で共用開始 → [s2j-post-dates-service](https://github.com/stein2nd/s2j-post-dates-service.git) に split。
+| サービス | `s2j/content-dates-service` (WP 非依存の算出・判定) |
+| 呼び出し側 | S2J Content Dates (プラグイン、仕様未着手) |
+| KIS での利用 | 固定記事 ・ CPT ・ 任意でメディア。製品親は子 `product_section` の `max(modified)` を集約 |
 
 ### Query Loop + ピン留め
 
+仕様の正: [S2J Query Pinned Service](https://github.com/stein2nd/s2j-query-pinned-service/blob/main/docs_mod/service_spec.md)
+
 | 要素 | 内容 |
 | --- | --- |
-| メタ | `_kis_pinned` (各 CPT) |
-| サービス | `s2j/query-pinned-service` |
-| ブロック | `kis/query-posts` (pin 優先 + 通常 N 件) |
-| ラッパー | kis-news / kis-event 用の専用ブロック (任意) |
+| サービス | `s2j/query-pinned-service` (ピン優先の ID 列組立) |
+| 呼び出し側 | S2J Query Pinned (プラグイン、仕様未着手) |
+| 合成 | 非ピンの更新日ソートは Content Dates。本サービスは日付を知らない |
+| KIS での利用 | トップ / ニュース一覧など。任意で kis-news 用ラッパー |
 
 ### 問い合わせ / SaaS 送信
+
+仕様の正: [S2J Inquiry Destination Service](https://github.com/stein2nd/s2j-inquiry-destination-service/blob/main/docs_mod/service_spec.md)
 
 | 要素 | 内容 |
 | --- | --- |
 | フォーム | Snow Monkey Forms (MW WP Form は並行後廃止) |
-| サービス | `s2j/inquiry-destination-service` |
-| アダプタ | メール → Backlog / Asana / Jooto 等 (REST API) |
+| サービス | `s2j/inquiry-destination-service` (統一ペイロードと送信先ポート) |
+| 呼び出し側 | S2J Inquiry Destination (プラグイン、仕様未着手) |
+| KIS | kis-inquiry はページと SMF。送信先ロジックは抱え込まない |
 | Phase-2最初 | **メール送信のみ** から開始可 |
 
 **アダプタ概念 (コンセント変換):**
@@ -309,7 +312,7 @@ Show Current Template プラグインへの依存は避ける。
 
 | Phase | 内容 |
 | --- | --- |
-| 1 | `index.php` の Query 部分を kis-core ブロックに |
+| 1 | `index.php` の Query 部分をピン優先ブロックに |
 | 3 | `templates/front-page.html`, `parts/header.html`, `parts/footer.html` |
 | 5 | PHP テンプレート削除 |
 
@@ -327,10 +330,7 @@ docs/                              # 確定後
 │   └── …
 ├── future-plugins/
 │   └── s2j-legal/WP_PLUGIN_SPEC.md    # → s2j-legal repo にコピー
-└── services/
-    ├── post-dates-service/SERVICE_SPEC.md
-    ├── query-pinned-service/SERVICE_SPEC.md
-    └── inquiry-destination-service/SERVICE_SPEC.md
+└── (日付・ピン・送信先の SERVICE_SPEC は各 s2j-*-service repo の docs/)
 ```
 
 | 文書種別 | 準拠 |
@@ -349,8 +349,8 @@ docs/                              # 確定後
 
 ### Composer
 
-* モノレポ `composer.json`: 開発ツール (PHPUnit, PHPStan) + パス リポジトリ。
-* プラグイン個別 `composer.json`: `s2j/*-service` を require。
+* モノレポ `composer.json`: 開発ツール (PHPUnit, PHPStan)。
+* プラグイン個別 `composer.json`: `s2j/*-service` を require (パス仮置きは使わない)。
 * サービスライブラリは **WordPress 非依存** (Similarity Service と同型)。
 
 ### URL
@@ -362,9 +362,9 @@ docs/                              # 確定後
 
 * Phase-0
     * kis-WordPress モノレポ
-    * ├ plugins/kis-core (CPT 移管、更新日、Template Debug)
+    * ├ plugins/kis-core (CPT 移管、Template Debug)
     * ├ plugins/kis-inquiry (MW フック移管のみでも可)
-    * ├ packages/ サービス仮置き
+    * ├3つの S2J サービス (仕様 → 実装) と、続く呼び出し側プラグイン仕様
     * └ docs_mod/specs.md → docs/ 分割開始
 * Phase-1
     * kis-case / corporate / recruit / products / reason
@@ -376,7 +376,6 @@ docs/                              # 確定後
     * ACF データ移行 → 脱 ACF (case 等)
 * Phase-5
     * PHP テンプレート削除
-    * (並行) packages/* → s2j-*-service repo に split
     * (並行) kis-legal 相当 → s2j-legal repo に split
     * (並行) s2j-◯◯◯◯ ([GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク) 別 repo 開発
 
@@ -395,10 +394,11 @@ docs/                              # 確定後
 
 1. [ ] `plugins/kis-core/` プラグイン骨格 (メインファイル・オートロード)
 2. [ ] `event` / `case` CPT をテーマ `functions.php` から移管
-3. [ ] `packages/post-dates-service/` スケルトン + 更新日ロジック初版
-4. [ ] 管理バー Template Debug
-5. [ ] `docs/plugins/kis-core/WP_PLUGIN_SPEC.md` ドラフト
-6. [ ] テーマ `functions.php` から移管済みコードを削除 (両 repo 同期後)
+3. [ ] 3つの S2J サービスの `service_spec.md` を進め、実装に移る
+4. [ ] 呼び出し側プラグイン (S2J Content Dates / Query Pinned / Inquiry Destination) の仕様に着手
+5. [ ] 管理バー Template Debug
+6. [ ] `docs/plugins/kis-core/WP_PLUGIN_SPEC.md` ドラフト
+7. [ ] テーマ `functions.php` から移管済みコードを削除 (両 repo 同期後)
 
 ## 改訂履歴
 
@@ -406,12 +406,13 @@ docs/                              # 確定後
 | --- | --- |
 | 2026-09-04 | 初版ドラフト (`docs_mod/specs.md` 起点作成) |
 | 2026-09-28 | 関連リポジトリを本モノレポ / 別 repo / 既存 S2J の三段に再編 |
+| 2026-09-29 | 日付・ピン・送信先を S2J サービスとして切り出し。呼び出し側プラグイン仕様は次工程 |
 
 ## 付録 A: コンテンツマップ (サイト IA)
 
 | ラベル | URL (想定) | 担当 |
 | --- | --- | --- |
-| Site Top | `/` | テーマ + kis-core ブロック |
+| Site Top | `/` | テーマ + ピン優先ブロック等 |
 | KIS が選ばれる理由 | `/reason/` | kis-reason |
 | ニュース | `/news/` | kis-news / `post` |
 | イベント | `/event/` | s2j-◯◯◯◯ (プロバイダ) |
@@ -430,6 +431,6 @@ docs/                              # 確定後
 | `docs/WP_KIS_ECOSYSTEM.md` | 未作成 (本書の正式版) |
 | `docs/ARCHITECTURE.md` | 未作成 |
 | `docs/plugins/kis-core/WP_PLUGIN_SPEC.md` | 未作成 |
-| `docs/services/post-dates-service/SERVICE_SPEC.md` | 未作成 |
+| 各 s2j-*-service `docs_mod/service_spec.md` | ドラフト着手 (本モノレポ外) |
 
 確定後、本 `docs_mod/specs.md` の各節を上記に分割移行する。

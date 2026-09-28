@@ -2,6 +2,12 @@
 
 ## unreleased
 
+## 0.0.4 - 2026-09-29
+
+### Changed
+
+* 仕様ドラフト (`docs_mod/specs.md`) の横断機能を S2J サービスとして切り出し (Content Dates / Query Pinned / Inquiry Destination)
+
 ## 0.0.3 - 2026-09-28
 
 ### Added
