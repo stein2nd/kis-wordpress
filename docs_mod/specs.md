@@ -77,18 +77,49 @@ flowchart TD
 
 | 文書 | 内容 |
 | --- | --- |
+| [関連リポジトリ](#関連リポジトリ) | 本モノレポ / 別 repo / 既存 S2J の地図 |
+| [プラグイン一覧と責務](#プラグイン一覧と責務) | CPT、データモデル、Phase |
+| [横断機能 (kis-core + サービス)](#横断機能-kis-core--サービス) | 更新日、pin 優先 Query、SaaS 送信 |
+| [フェーズロードマップ](#フェーズロードマップ) | Phase-0〜5と repo split |
 
 ## 関連リポジトリ
 
-| 種別 | リポジトリ | 状態 |
+本 repo は [kis-wordpress](https://github.com/stein2nd/kis-wordpress.git)。テーマは [kis2026_base](https://github.com/stein2nd/kis2026_base.git) (見た目、FSE)。テーマ側 [§1.5 依存プラグイン](https://github.com/stein2nd/kis2026_base/blob/main/docs/spec.md) は索引で、詳細の正は本書。実装はロードマップ順であり、8本を今すぐ実装する前提ではない。
+
+### 本モノレポが当面管理するプラグイン
+
+Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` に置く。データモデル等の詳細は [プラグイン一覧と責務](#プラグイン一覧と責務)。
+
+| プラグイン | 担当 | Phase |
 | --- | --- | --- |
-| モノレポ (本 repo) | [kis-wordpress](https://github.com/stein2nd/kis-wordpress.git) | Phase-0着手 |
-| テーマ | [kis2026_base](https://github.com/stein2nd/kis2026_base.git) | 既存 (見た目、FSE) |
-| WP プラグイン (汎用) | [s2j-legal](https://github.com/stein2nd/s2j-legal.git) | 空 repo (後日 split) |
-| サービスライブラリ | [s2j-post-dates-service](https://github.com/stein2nd/s2j-post-dates-service.git) | 空 repo |
-| サービスライブラリ | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | 空 repo |
-| サービスライブラリ | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 空 repo |
-| WP プラグイン (将来) | `s2j-◯◯◯◯` ([GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク系イベント) | 未作成 |
+| **kis-core** | 共通基盤 (CPT 移管、更新日、Template Debug、Query ブロック等) | 0 |
+| **kis-inquiry** | 問い合わせ・資料請求 (Snow Monkey Forms、SaaS 送信) | 0〜2 |
+| **kis-case** | 導入事例 | 1 |
+| **kis-corporate** | 会社情報 | 1 |
+| **kis-recruit** | 採用情報 | 1 |
+| **kis-products** | 製品情報 (`product` + `product_section`) | 1 |
+| **kis-reason** | KIS が選ばれる理由 | 1 |
+| **kis-news** | ニュース・お知らせ (`post` または専用 CPT) | 0〜1 |
+
+### 別リポジトリ (汎用・サービス)
+
+横断ロジックは当面 `packages/` に仮置きし、2プラグイン以上で共用開始後に各 `s2j-*-service` へ split する (Phase-5前後)。`s2j-legal` は最初から別 repo。詳細は [横断機能 (kis-core + サービス)](#横断機能-kis-core--サービス)。
+
+| 名称 | 種別 | リポジトリ | 備考 | 状態 |
+| --- | --- | --- | --- | --- |
+| **S2J Legal** | WP プラグイン | [s2j-legal](https://github.com/stein2nd/s2j-legal.git) | 個人情報・情報セキュリティ等 (法務) | 空 repo |
+| **post-dates-service** | Composer サービス | [s2j-post-dates-service](https://github.com/stein2nd/s2j-post-dates-service.git) | 公開日・更新日の表示ロジック。当面 `packages/post-dates-service/` | 空 repo |
+| **query-pinned-service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | pin 優先 + 残り N 件の並べ替え (WP 非依存)。当面 `packages/query-pinned-service/` | 空 repo |
+| **inquiry-destination-service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 問い合わせ SaaS アダプタ。当面 `packages/inquiry-destination-service/` | 空 repo |
+| **s2j-◯◯◯◯** (仮) | WP プラグイン | (未作成) | [GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク系イベント ([kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) 後継) | 未作成 |
+
+### 既存 S2J プラグイン (連携)
+
+| プラグイン | 本モノレポでの用途 |
+| --- | --- |
+| [S2J Alliance Manager](https://github.com/stein2nd/s2j-alliance-manager.git) | トップ / reason のアイコンパレード (ブロック + ショートコード) |
+| [S2J Slug Generater](https://github.com/stein2nd/s2j-slug-generater.git) | 新 CPT のスラッグ生成 ([S2J Similarity Service](https://github.com/stein2nd/s2j-similarity-service.git) 利用) |
+| [kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) | 現行イベント。段階的に `s2j-◯◯◯◯` へ差し替え |
 
 ## 背景と目的
 
@@ -134,31 +165,27 @@ flowchart TB
 
 ### 既存製品との関係
 
-| 製品 | 役割 |
-| --- | --- |
-| [S2J Alliance Manager](https://github.com/stein2nd/s2j-alliance-manager.git) | トップ / reason のアイコンパレード (ブロック + ショートコード) |
-| [S2J Slug Generater](https://github.com/stein2nd/s2j-slug-generater.git) | 新 CPT のスラッグ生成 (Similarity Service 利用) |
-| [kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) | 段階的に [GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク (`s2j-◯◯◯◯`) に差し替え |
+連携する既存プラグインは、[既存 S2J プラグイン (連携)](#既存-s2j-プラグイン-連携) を参照。
 
 ## リポジトリ構成 (kis-WordPress モノレポ)
 
 ```text
 kis-wordpress/
 ├── docs/                          # 確定後の正式仕様 (将来)
-├── docs_mod/                      # ドラフト・設計メモ (本ファイル含む)
-│   └── specs.md                   # ★ 仕様起点 (本書)
-├── plugins/                       # WordPress プラグイン
-│   ├── kis-core/                  # Phase-0: 必須基盤
-│   ├── kis-case/                  # Phase-1
-│   ├── kis-corporate/             # Phase-1
-│   ├── kis-recruit/             # Phase-1
-│   ├── kis-products/            # Phase-1
-│   ├── kis-reason/              # Phase-1
-│   └── kis-inquiry/             # Phase-0 骨格 → Phase-2 完成
-├── packages/                      # サービス実装の仮置き (後日 *-service repo に)
-│   ├── post-dates-service/
-│   ├── query-pinned-service/
-│   └── inquiry-destination-service/
+├┬─ docs_mod/                      # ドラフト・設計メモ (本ファイル含む)
+│└── specs.md                   # ★ 仕様起点 (本書)
+├┬─ plugins/                       # WordPress プラグイン
+│├── kis-core/                  # Phase-0: 必須基盤
+│├── kis-case/                  # Phase-1
+│├── kis-corporate/             # Phase-1
+│├── kis-recruit/             # Phase-1
+│├── kis-products/            # Phase-1
+│├── kis-reason/              # Phase-1
+│└── kis-inquiry/             # Phase-0 骨格 → Phase-2 完成
+├┬─ packages/                      # サービス実装の仮置き (後日 *-service repo に)
+│├── post-dates-service/
+│├── query-pinned-service/
+│└── inquiry-destination-service/
 ├── composer.json                  # 開発ツール + path リポジトリ
 └── README.md
 ```
@@ -378,6 +405,7 @@ docs/                              # 確定後
 | 日付 | 内容 |
 | --- | --- |
 | 2026-09-04 | 初版ドラフト (`docs_mod/specs.md` 起点作成) |
+| 2026-09-28 | 関連リポジトリを本モノレポ / 別 repo / 既存 S2J の三段に再編 |
 
 ## 付録 A: コンテンツマップ (サイト IA)
 

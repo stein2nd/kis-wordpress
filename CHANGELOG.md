@@ -2,6 +2,16 @@
 
 ## unreleased
 
+## 0.0.3 - 2026-09-28
+
+### Added
+
+* ブロック開発用に React と Vite を追加 (`react` ^19.3.0、`vite` ^8.3.1)
+
+### Changed
+
+* 仕様ドラフト (`docs_mod/specs.md`) の関連リポジトリを本モノレポ / 別 repo / 既存 S2J の三段に再編
+
 ## 0.0.2 - 2026-09-26
 
 ### Added
