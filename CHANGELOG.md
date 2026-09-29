@@ -6,6 +6,7 @@
 
 ### Changed
 
+* 仕様ドラフト (`docs_mod/specs.md`) の S2J Legal を S2J Site Policy Manager (ポリシー台帳) へ改称
 * 仕様ドラフト (`docs_mod/specs.md`) の横断機能を S2J サービスとして切り出し (Content Dates / Query Pinned / Inquiry Destination)
 
 ## 0.0.3 - 2026-09-28

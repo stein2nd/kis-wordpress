@@ -103,11 +103,11 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 
 ### 別リポジトリ (汎用・サービス)
 
-横断機能の Composer ライブラリは **S2J プロダクトとして別 repo** に切り出しました。仕様の正は各 repo の `docs_mod/service_spec.md` です。次は各サービスの仕様確定と実装、その後に呼び出し側プラグインの仕様です。`s2j-legal` は最初から別 repo です。詳細は [横断機能 (S2J プロダクト)](#横断機能-s2j-プロダクト)。
+横断機能の Composer ライブラリは **S2J プロダクトとして別 repo** に切り出しました。仕様の正は各 repo の `docs_mod/service_spec.md` です。次は各サービスの仕様確定と実装、その後に呼び出し側プラグインの仕様です。`s2j-site-policy-manager` は最初から別 repo です。製品方針は当該 repo の `docs_mod/product-direction.md` を参照します。詳細は [横断機能 (S2J プロダクト)](#横断機能-s2j-プロダクト)。
 
 | 名称 | 種別 | リポジトリ | 備考 | 状態 |
 | --- | --- | --- | --- | --- |
-| **S2J Legal** | WP プラグイン | [s2j-legal](https://github.com/stein2nd/s2j-legal.git) | 個人情報・情報セキュリティ等 (法務) | 空 repo |
+| **S2J Site Policy Manager** | WP プラグイン | [s2j-site-policy-manager](https://github.com/stein2nd/s2j-site-policy-manager.git) | ポリシー台帳。KIS は個人情報の保護方針と情報セキュリティ基本方針。旧称 S2J Legal | 方向性メモ |
 | **S2J Content Dates Service** | Composer サービス | [s2j-content-dates-service](https://github.com/stein2nd/s2j-content-dates-service.git) | 公開日・更新日の算出。呼び出し側は S2J Content Dates (プラグイン、未着手) | 仕様ドラフト |
 | **S2J Query Pinned Service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | ピン優先 + 残り N 件の組立。呼び出し側は S2J Query Pinned (プラグイン、未着手) | 仕様ドラフト |
 | **S2J Inquiry Destination Service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 問い合わせ送信先のコンセント変換。呼び出し側は S2J Inquiry Destination (プラグイン、未着手) | 仕様ドラフト |
@@ -205,7 +205,7 @@ kis-wordpress/
 | **kis-products** | 製品情報 | CPT `product` + 子 `product_section` | 1 |
 | **kis-reason** | KIS が選ばれる理由 | 専用 CPT または固定ページ + パターン | 1 |
 | **kis-inquiry** | 問い合わせ・資料請求 | Snow Monkey Forms + SaaS | 0: 骨格 / 2: 完成 |
-| **s2j-legal** (別 repo) | 個人情報・情報セキュリティ等 | 法務 CPT | 1〜 (split) |
+| **s2j-site-policy** (別 repo) | 個人情報・情報セキュリティ等 | ポリシー台帳 (固定ページに紐づけ) | 1〜 (別 repo) |
 
 ### イベント (モノレポ外)
 
@@ -241,7 +241,7 @@ product (親: Forwarder-PRO 等)
 
 ### 更新日の見える化 (created + modified)
 
-**全プラグイン / s2j-legal / 将来の s2j-◯◯◯◯ で利用しうる横断機能。**
+**全プラグイン / s2j-site-policy / 将来の s2j-◯◯◯◯ で利用しうる横断機能。**
 
 仕様の正: [S2J Content Dates Service](https://github.com/stein2nd/s2j-content-dates-service/blob/main/docs_mod/service_spec.md)
 
@@ -329,7 +329,7 @@ docs/                              # 確定後
 │   ├── kis-case/WP_PLUGIN_SPEC.md
 │   └── …
 ├── future-plugins/
-│   └── s2j-legal/WP_PLUGIN_SPEC.md    # → s2j-legal repo にコピー
+│   └── s2j-site-policy-manager/WP_PLUGIN_SPEC.md    # → s2j-site-policy-manager repo にコピー
 └── (日付・ピン・送信先の SERVICE_SPEC は各 s2j-*-service repo の docs/)
 ```
 
@@ -376,7 +376,7 @@ docs/                              # 確定後
     * ACF データ移行 → 脱 ACF (case 等)
 * Phase-5
     * PHP テンプレート削除
-    * (並行) kis-legal 相当 → s2j-legal repo に split
+    * (並行) S2J Site Policy Manager で `/privacy/` と `/informationsecurity/` を公開
     * (並行) s2j-◯◯◯◯ ([GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク) 別 repo 開発
 
 ## 既知の移行課題
@@ -407,6 +407,7 @@ docs/                              # 確定後
 | 2026-09-04 | 初版ドラフト (`docs_mod/specs.md` 起点作成) |
 | 2026-09-28 | 関連リポジトリを本モノレポ / 別 repo / 既存 S2J の三段に再編 |
 | 2026-09-29 | 日付・ピン・送信先を S2J サービスとして切り出し。呼び出し側プラグイン仕様は次工程 |
+| 2026-09-29 | S2J Legal を S2J Site Policy Manager に改称。データモデルはポリシー台帳 |
 
 ## 付録 A: コンテンツマップ (サイト IA)
 
@@ -421,8 +422,8 @@ docs/                              # 確定後
 | 会社情報 | `/corporate/` | kis-corporate |
 | 採用情報 | `/recruit/` | kis-recruit |
 | 問い合わせ | `/inquiry/` | kis-inquiry |
-| 個人情報の保護方針 | `/privacy/` | s2j-legal |
-| 情報セキュリティ基本方針 | `/informationsecurity/` | s2j-legal |
+| 個人情報の保護方針 | `/privacy/` | s2j-site-policy |
+| 情報セキュリティ基本方針 | `/informationsecurity/` | s2j-site-policy |
 
 ## 付録 B: 関連ドキュメント (未作成)
 
