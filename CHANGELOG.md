@@ -2,6 +2,13 @@
 
 ## unreleased
 
+## 0.0.4 - 2026-10-03
+
+### Changed
+
+* 開発用 npm 依存を更新 (`@s2j/docs-linter` ^1.0.26、`rollup` ^4.64.0、`vite` ^8.3.2)
+* VS Code 設定の `npm.enableScriptExplorer` を `json.schemaDownload.enable` へ変更
+
 ## 0.0.4 - 2026-09-29
 
 ### Changed
