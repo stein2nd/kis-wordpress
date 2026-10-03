@@ -6,6 +6,8 @@
 
 ### Changed
 
+* 仕様ドラフト (`docs_mod/specs.md`) の仮称 `s2j-◯◯◯◯` を、GatherPress フォーク + S2J Webinar + S2J Webinar Service に分割
+
 * 開発用 npm 依存を更新 (`@s2j/docs-linter` ^1.0.26、`rollup` ^4.64.0、`vite` ^8.3.2)
 * VS Code 設定の `npm.enableScriptExplorer` を `json.schemaDownload.enable` へ変更
 

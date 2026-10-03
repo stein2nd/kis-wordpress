@@ -111,7 +111,8 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 | **S2J Content Dates Service** | Composer サービス | [s2j-content-dates-service](https://github.com/stein2nd/s2j-content-dates-service.git) | 公開日・更新日の算出。呼び出し側は S2J Content Dates (プラグイン、未着手) | 仕様ドラフト |
 | **S2J Query Pinned Service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | ピン優先 + 残り N 件の組立。呼び出し側は S2J Query Pinned (プラグイン、未着手) | 仕様ドラフト |
 | **S2J Inquiry Destination Service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 問い合わせ送信先のコンセント変換。呼び出し側は S2J Inquiry Destination (プラグイン、未着手) | 仕様ドラフト |
-| **s2j-◯◯◯◯** (仮) | WP プラグイン | (未作成) | [GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク系イベント ([kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) 後継) | 未作成 |
+| **S2J Webinar** | WP プラグイン | [s2j-webinar](https://github.com/stein2nd/s2j-webinar.git) | [GatherPress](https://github.com/GatherPress/gatherpress) のコンパニオン。イベント UI は [フォーク版 GatherPress](https://github.com/stein2nd/gatherpress)。仕様は [specs.md](https://github.com/stein2nd/s2j-webinar/blob/main/docs_mod/specs.md) | 仕様ドラフト |
+| **S2J Webinar Service** | Composer サービス | [s2j-webinar-service](https://github.com/stein2nd/s2j-webinar-service.git) | Zoom Webinar のリクエスト組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-webinar-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
 
 ### 既存 S2J プラグイン (連携)
 
@@ -119,7 +120,7 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 | --- | --- |
 | [S2J Alliance Manager](https://github.com/stein2nd/s2j-alliance-manager.git) | トップ / reason のアイコンパレード (ブロック + ショートコード) |
 | [S2J Slug Generater](https://github.com/stein2nd/s2j-slug-generater.git) | 新 CPT のスラッグ生成 ([S2J Similarity Service](https://github.com/stein2nd/s2j-similarity-service.git) 利用) |
-| [kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) | 現行イベント。段階的に `s2j-◯◯◯◯` へ差し替え |
+| [kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) | 現行イベント。段階的に GatherPress フォーク + S2J Webinar へ差し替え |
 
 ## 背景と目的
 
@@ -150,7 +151,7 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 flowchart TB
     A1["kis2026_base<br />テーマ<br />templates/　parts/　patterns/　theme.json　styles"]
     A2["kis-wordpress<br />プラグイン モノレポ<br />kis-core, kis-case, kis-products, kis-inquiry, …"]
-    A3["サービス・ライブラリ<br />WordPress 非依存<br />s2j/content-dates-service<br />s2j/query-pinned-service<br />s2j/inquiry-destination-service"]
+    A3["サービス・ライブラリ<br />WordPress 非依存<br />s2j/content-dates-service<br />s2j/query-pinned-service<br />s2j/inquiry-destination-service<br />s2j/webinar-service"]
 
     A1 --> B1["見た目・レイアウトのみ"]
     A1 -->|template / block rendering| A2
@@ -209,15 +210,15 @@ kis-wordpress/
 
 ### イベント (モノレポ外)
 
-* **kis-event-manager** → 将来 **[GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク (`s2j-◯◯◯◯`)** に。
-* **kis-core** が `Kis_Event_Provider` インターフェースを提供し、実装を差し替え可能にする。
+* **kis-event-manager** は、段階的に次の組み合わせに置き換える。イベント UI は [GatherPress](https://github.com/GatherPress/gatherpress) のフォーク [stein2nd/gatherpress](https://github.com/stein2nd/gatherpress)。呼び出し側は [S2J Webinar](https://github.com/stein2nd/s2j-webinar.git)。Zoom のリクエスト組立は [S2J Webinar Service](https://github.com/stein2nd/s2j-webinar-service.git)。
+* **kis-core** が `Kis_Event_Provider` インターフェースを提供し、一覧と単体の取得先を差し替える。Webinar の作成は、このインターフェースの外である。
 
 ```php
 // イメージ (詳細は plugins/kis-core 仕様に)
 interface Kis_Event_Provider {
     // イベント一覧取得・単体取得等
 }
-// 実装: Legacy_Kis_Event_Manager | S2J_GatherPress_Fork
+// 実装: Legacy_Kis_Event_Manager | GatherPress
 ```
 
 ### 製品情報 — 案 A (採用)
@@ -241,7 +242,7 @@ product (親: Forwarder-PRO 等)
 
 ### 更新日の見える化 (created + modified)
 
-**全プラグイン / s2j-site-policy / 将来の s2j-◯◯◯◯ で利用しうる横断機能。**
+**全プラグイン / s2j-site-policy / 将来の GatherPress イベントで利用しうる横断機能。**
 
 仕様の正: [S2J Content Dates Service](https://github.com/stein2nd/s2j-content-dates-service/blob/main/docs_mod/service_spec.md)
 
@@ -377,7 +378,7 @@ docs/                              # 確定後
 * Phase-5
     * PHP テンプレート削除
     * (並行) S2J Site Policy Manager で `/privacy/` と `/informationsecurity/` を公開
-    * (並行) s2j-◯◯◯◯ ([GatherPress](https://github.com/GatherPress/gatherpress.git) フォーク) 別 repo 開発
+    * (並行) GatherPress フォーク + S2J Webinar。Zoom 連携の計算は S2J Webinar Service
 
 ## 既知の移行課題
 
@@ -408,6 +409,8 @@ docs/                              # 確定後
 | 2026-09-28 | 関連リポジトリを本モノレポ / 別 repo / 既存 S2J の三段に再編 |
 | 2026-09-29 | 日付・ピン・送信先を S2J サービスとして切り出し。呼び出し側プラグイン仕様は次工程 |
 | 2026-09-29 | S2J Legal を S2J Site Policy Manager に改称。データモデルはポリシー台帳 |
+| 2026-10-03 | 仮称 `s2j-◯◯◯◯` を、GatherPress フォーク + S2J Webinar (仮) + S2J Webinar Service に分割 |
+| 2026-10-03 | S2J Webinar のリポジトリを [s2j-webinar](https://github.com/stein2nd/s2j-webinar) とし、仕様ドラフトを当該 repo に置いた |
 
 ## 付録 A: コンテンツマップ (サイト IA)
 
@@ -416,7 +419,7 @@ docs/                              # 確定後
 | Site Top | `/` | テーマ + ピン優先ブロック等 |
 | KIS が選ばれる理由 | `/reason/` | kis-reason |
 | ニュース | `/news/` | kis-news / `post` |
-| イベント | `/event/` | s2j-◯◯◯◯ (プロバイダ) |
+| イベント | `/event/` | GatherPress フォーク + S2J Webinar |
 | 製品情報 | `/products/` | kis-products |
 | 導入事例 | `/case/` | kis-case |
 | 会社情報 | `/corporate/` | kis-corporate |
