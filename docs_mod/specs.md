@@ -108,9 +108,14 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 | 名称 | 種別 | リポジトリ | 備考 | 状態 |
 | --- | --- | --- | --- | --- |
 | **S2J Site Policy Manager** | WP プラグイン | [s2j-site-policy-manager](https://github.com/stein2nd/s2j-site-policy-manager.git) | ポリシー台帳。KIS は個人情報の保護方針と情報セキュリティ基本方針。旧称 S2J Legal | 方向性メモ |
-| **S2J Content Dates Service** | Composer サービス | [s2j-content-dates-service](https://github.com/stein2nd/s2j-content-dates-service.git) | 公開日・更新日の算出。呼び出し側は S2J Content Dates (プラグイン、未着手) | 仕様ドラフト |
-| **S2J Query Pinned Service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | ピン優先 + 残り N 件の組立。呼び出し側は S2J Query Pinned (プラグイン、未着手) | 仕様ドラフト |
-| **S2J Inquiry Destination Service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 問い合わせ送信先のコンセント変換。呼び出し側は S2J Inquiry Destination (プラグイン、未着手) | 仕様ドラフト |
+| **S2J Content Dates** | WP プラグイン | [s2j-content-dates](https://github.com/stein2nd/s2j-content-dates.git) | 公開日と更新日の表示。仕様は [specs.md](https://github.com/stein2nd/s2j-content-dates/blob/main/docs_mod/specs.md) | 仕様ドラフト |
+| **S2J Content Dates Service** | Composer サービス | [s2j-content-dates-service](https://github.com/stein2nd/s2j-content-dates-service.git) | 公開日・更新日の算出 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-content-dates-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
+| **S2J Query Pinned** | WP プラグイン | [s2j-query-pinned](https://github.com/stein2nd/s2j-query-pinned.git) | 一覧の先頭にピン留めを置く。仕様は [specs.md](https://github.com/stein2nd/s2j-query-pinned/blob/main/docs_mod/specs.md) | 仕様ドラフト |
+| **S2J Query Pinned Service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | ピン優先 + 残り N 件の組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-query-pinned-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
+| **S2J Inquiry Destination** | WP プラグイン | [s2j-inquiry-destination](https://github.com/stein2nd/s2j-inquiry-destination.git) | 問い合わせの送信先。フォームは Snow Monkey Forms。仕様は [specs.md](https://github.com/stein2nd/s2j-inquiry-destination/blob/main/docs_mod/specs.md) | 仕様ドラフト |
+| **S2J Inquiry Destination Service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 問い合わせ送信先のコンセント変換 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-inquiry-destination-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
+| **S2J Video Publisher** | WP プラグイン | [s2j-video-publisher](https://github.com/stein2nd/s2j-video-publisher.git) | YouTube の限定公開の公開期間。仕様は [specs.md](https://github.com/stein2nd/s2j-video-publisher/blob/main/docs_mod/specs.md) | 仕様ドラフト |
+| **S2J Video Publisher Service** | Composer サービス | [s2j-video-publisher-service](https://github.com/stein2nd/s2j-video-publisher-service.git) | 限定公開の公開期間のリクエスト組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-video-publisher-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
 | **S2J Webinar** | WP プラグイン | [s2j-webinar](https://github.com/stein2nd/s2j-webinar.git) | [GatherPress](https://github.com/GatherPress/gatherpress) のコンパニオン。イベント UI は [フォーク版 GatherPress](https://github.com/stein2nd/gatherpress)。仕様は [specs.md](https://github.com/stein2nd/s2j-webinar/blob/main/docs_mod/specs.md) | 仕様ドラフト |
 | **S2J Webinar Service** | Composer サービス | [s2j-webinar-service](https://github.com/stein2nd/s2j-webinar-service.git) | Zoom Webinar のリクエスト組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-webinar-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
 
@@ -249,7 +254,7 @@ product (親: Forwarder-PRO 等)
 | 要素 | 内容 |
 | --- | --- |
 | サービス | `s2j/content-dates-service` (WP 非依存の算出・判定) |
-| 呼び出し側 | S2J Content Dates (プラグイン、仕様未着手) |
+| 呼び出し側 | [S2J Content Dates](https://github.com/stein2nd/s2j-content-dates.git)。仕様は [specs.md](https://github.com/stein2nd/s2j-content-dates/blob/main/docs_mod/specs.md) |
 | KIS での利用 | 固定記事 ・ CPT ・ 任意でメディア。製品親は子 `product_section` の `max(modified)` を集約 |
 
 ### Query Loop + ピン留め
@@ -259,7 +264,7 @@ product (親: Forwarder-PRO 等)
 | 要素 | 内容 |
 | --- | --- |
 | サービス | `s2j/query-pinned-service` (ピン優先の ID 列組立) |
-| 呼び出し側 | S2J Query Pinned (プラグイン、仕様未着手) |
+| 呼び出し側 | [S2J Query Pinned](https://github.com/stein2nd/s2j-query-pinned.git)。仕様は [specs.md](https://github.com/stein2nd/s2j-query-pinned/blob/main/docs_mod/specs.md) |
 | 合成 | 非ピンの更新日ソートは Content Dates。本サービスは日付を知らない |
 | KIS での利用 | トップ / ニュース一覧など。任意で kis-news 用ラッパー |
 
@@ -271,7 +276,7 @@ product (親: Forwarder-PRO 等)
 | --- | --- |
 | フォーム | Snow Monkey Forms (MW WP Form は並行後廃止) |
 | サービス | `s2j/inquiry-destination-service` (統一ペイロードと送信先ポート) |
-| 呼び出し側 | S2J Inquiry Destination (プラグイン、仕様未着手) |
+| 呼び出し側 | [S2J Inquiry Destination](https://github.com/stein2nd/s2j-inquiry-destination.git)。仕様は [specs.md](https://github.com/stein2nd/s2j-inquiry-destination/blob/main/docs_mod/specs.md) |
 | KIS | kis-inquiry はページと SMF。送信先ロジックは抱え込まない |
 | Phase-2最初 | **メール送信のみ** から開始可 |
 
@@ -396,7 +401,7 @@ docs/                              # 確定後
 1. [ ] `plugins/kis-core/` プラグイン骨格 (メインファイル・オートロード)
 2. [ ] `event` / `case` CPT をテーマ `functions.php` から移管
 3. [ ] 3つの S2J サービスの `service_spec.md` を進め、実装に移る
-4. [ ] 呼び出し側プラグイン (S2J Content Dates / Query Pinned / Inquiry Destination) の仕様に着手
+4. [x] 呼び出し側プラグインの仕様に着手 (Content Dates、Query Pinned、Inquiry Destination はドラフト済み)
 5. [ ] 管理バー Template Debug
 6. [ ] `docs/plugins/kis-core/WP_PLUGIN_SPEC.md` ドラフト
 7. [ ] テーマ `functions.php` から移管済みコードを削除 (両 repo 同期後)
@@ -411,6 +416,10 @@ docs/                              # 確定後
 | 2026-09-29 | S2J Legal を S2J Site Policy Manager に改称。データモデルはポリシー台帳 |
 | 2026-10-03 | 仮称 `s2j-◯◯◯◯` を、GatherPress フォーク + S2J Webinar (仮) + S2J Webinar Service に分割 |
 | 2026-10-03 | S2J Webinar のリポジトリを [s2j-webinar](https://github.com/stein2nd/s2j-webinar) とし、仕様ドラフトを当該 repo に置いた |
+| 2026-10-04 | S2J Video Publisher と S2J Video Publisher Service の仕様ドラフトを索引に加えた |
+| 2026-10-04 | S2J Content Dates の仕様ドラフトを索引に加えた |
+| 2026-10-04 | S2J Query Pinned の仕様ドラフトを索引に加えた |
+| 2026-10-04 | S2J Inquiry Destination の仕様ドラフトを索引に加えた |
 
 ## 付録 A: コンテンツマップ (サイト IA)
 

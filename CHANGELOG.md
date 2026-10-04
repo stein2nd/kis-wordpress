@@ -2,6 +2,13 @@
 
 ## unreleased
 
+## 0.0.4 - 2026-10-04
+
+### Changed
+
+* 仕様ドラフト (`docs_mod/specs.md`) に、プラグイン「Content Dates」「Query Pinned」「Inquiry Destination」「Video Publisher」の仕様索引を追加
+* 開発用 npm 依存を更新 (`@s2j/docs-linter` ^1.0.27)
+
 ## 0.0.4 - 2026-10-03
 
 ### Changed
