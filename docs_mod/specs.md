@@ -118,6 +118,8 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 | **S2J Video Publisher Service** | Composer サービス | [s2j-video-publisher-service](https://github.com/stein2nd/s2j-video-publisher-service.git) | 限定公開の公開期間のリクエスト組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-video-publisher-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
 | **S2J Webinar** | WP プラグイン | [s2j-webinar](https://github.com/stein2nd/s2j-webinar.git) | [GatherPress](https://github.com/GatherPress/gatherpress) のコンパニオン。イベント UI は [フォーク版 GatherPress](https://github.com/stein2nd/gatherpress)。仕様は [specs.md](https://github.com/stein2nd/s2j-webinar/blob/main/docs_mod/specs.md) | 仕様ドラフト |
 | **S2J Webinar Service** | Composer サービス | [s2j-webinar-service](https://github.com/stein2nd/s2j-webinar-service.git) | Zoom Webinar のリクエスト組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-webinar-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
+| **S2J Webinar Survey** | WP プラグイン | [s2j-webinar-survey](https://github.com/stein2nd/s2j-webinar-survey.git) | ウェビナーのアンケート設問。仕様は [specs.md](https://github.com/stein2nd/s2j-webinar-survey/blob/main/docs_mod/specs.md) | 仕様ドラフト |
+| **S2J Webinar Survey Service** | Composer サービス | [s2j-webinar-survey-service](https://github.com/stein2nd/s2j-webinar-survey-service.git) | 設問文書の検査と助言、下書きの依頼文 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-webinar-survey-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
 
 ### 既存 S2J プラグイン (連携)
 
@@ -420,6 +422,7 @@ docs/                              # 確定後
 | 2026-10-04 | S2J Content Dates の仕様ドラフトを索引に加えた |
 | 2026-10-04 | S2J Query Pinned の仕様ドラフトを索引に加えた |
 | 2026-10-04 | S2J Inquiry Destination の仕様ドラフトを索引に加えた |
+| 2026-10-06 | S2J Webinar Survey と S2J Webinar Survey Service の仕様ドラフトを索引に加えた |
 
 ## 付録 A: コンテンツマップ (サイト IA)
 

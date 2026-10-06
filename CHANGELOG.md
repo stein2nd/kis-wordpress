@@ -2,6 +2,12 @@
 
 ## unreleased
 
+## 0.0.4 - 2026-10-06
+
+### Changed
+
+* 仕様ドラフト (`docs_mod/specs.md`) に、S2J Webinar Survey と S2J Webinar Survey Service の仕様索引を追加
+
 ## 0.0.4 - 2026-10-04
 
 ### Changed
