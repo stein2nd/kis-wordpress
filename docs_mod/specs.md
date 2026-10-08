@@ -2,7 +2,7 @@
 
 本ドキュメントでは、WordPress プラグイン「KIS WordPress」の専用仕様を定義します。
 
-共通基盤は、引き続き次に準拠します。
+共通基盤は、引き続き下記に準拠します。
 
 * [WP_PLUGIN_SPEC.md (共通仕様)](https://github.com/stein2nd/wp-plugin-spec/blob/main/WP_PLUGIN_SPEC.md)
 
@@ -10,7 +10,7 @@
 
 ## 設計・実装の基本アプローチ
 
-本プラグインは、次を **基本アプローチ** とします。
+本プラグインは、下記を **基本アプローチ** とします。
 
 * **FOP (Functional Object-Oriented Programming) + Clean Coding 土台**  
 * Clean Architecture はフル採用せず、**借用する原則だけ** を取り入れる
@@ -63,7 +63,7 @@ flowchart TD
 
 ### Clean Architecture から借用する原則
 
-フルセットの Clean Architecture (Entity / UseCase / Gateway / Presenter の定型分割) は採用しません。Clean Architecture から、次だけを借用します。
+フルセットの Clean Architecture (Entity / UseCase / Gateway / Presenter の定型分割) は採用しません。Clean Architecture から、下記だけを借用します。
 
 | 借用する原則 | 本プラグインでの意味 |
 | --- | --- |
@@ -103,7 +103,7 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 
 ### 別リポジトリ (汎用・サービス)
 
-横断機能の Composer ライブラリは **S2J プロダクトとして別 repo** に切り出しました。仕様の正は各 repo の `docs_mod/service_spec.md` です。次は各サービスの仕様確定と実装、その後に呼び出し側プラグインの仕様です。`s2j-site-policy-manager` は最初から別 repo です。製品方針は当該 repo の `docs_mod/product-direction.md` を参照します。詳細は [横断機能 (S2J プロダクト)](#横断機能-s2j-プロダクト)。
+横断機能の Composer ライブラリは **S2J プロダクトとして別 repo** に切り出しました。仕様の正は各 repo の `docs_mod/service_spec.md` です。下記は各サービスの仕様確定と実装、その後に呼び出し側プラグインの仕様です。`s2j-site-policy-manager` は最初から別 repo です。製品方針は当該 repo の `docs_mod/product-direction.md` を参照します。詳細は [横断機能 (S2J プロダクト)](#横断機能-s2j-プロダクト)。
 
 | 名称 | 種別 | リポジトリ | 備考 | 状態 |
 | --- | --- | --- | --- | --- |
@@ -217,7 +217,7 @@ kis-wordpress/
 
 ### イベント (モノレポ外)
 
-* **kis-event-manager** は、段階的に次の組み合わせに置き換える。イベント UI は [GatherPress](https://github.com/GatherPress/gatherpress) のフォーク [stein2nd/gatherpress](https://github.com/stein2nd/gatherpress)。呼び出し側は [S2J Webinar](https://github.com/stein2nd/s2j-webinar.git)。Zoom のリクエスト組立は [S2J Webinar Service](https://github.com/stein2nd/s2j-webinar-service.git)。
+* **kis-event-manager** は、段階的に右記の組み合わせに置き換える。イベント UI は [GatherPress](https://github.com/GatherPress/gatherpress) のフォーク [stein2nd/gatherpress](https://github.com/stein2nd/gatherpress)。呼び出し側は [S2J Webinar](https://github.com/stein2nd/s2j-webinar.git)。Zoom のリクエスト組立は [S2J Webinar Service](https://github.com/stein2nd/s2j-webinar-service.git)。
 * **kis-core** が `Kis_Event_Provider` インターフェースを提供し、一覧と単体の取得先を差し替える。Webinar の作成は、このインターフェースの外である。
 
 ```php
@@ -245,7 +245,7 @@ product (親: Forwarder-PRO 等)
 
 日付・ピン留め・問い合わせ送信は kis-core に抱え込まず、**Composer ライブラリ + 呼び出し側 WP プラグイン** として切り出します。KIS サイトはそれらを require / 有効化します。
 
-次の順で進めます。各サービスの仕様検討 → 実装 → 呼び出し側プラグインの仕様検討。
+右記の順で進めます。各サービスの仕様検討 → 実装 → 呼び出し側プラグインの仕様検討。
 
 ### 更新日の見える化 (created + modified)
 
