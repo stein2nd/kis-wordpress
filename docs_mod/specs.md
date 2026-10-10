@@ -127,7 +127,7 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 | --- | --- |
 | [S2J Alliance Manager](https://github.com/stein2nd/s2j-alliance-manager.git) | トップ / reason のアイコンパレード (ブロック + ショートコード) |
 | [S2J Slug Generater](https://github.com/stein2nd/s2j-slug-generater.git) | 新 CPT のスラッグ生成 ([S2J Similarity Service](https://github.com/stein2nd/s2j-similarity-service.git) 利用) |
-| [kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) | 現行イベント。段階的に GatherPress フォーク + S2J Webinar へ差し替え |
+| [kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) | 現行イベント。段階的に GatherPress フォーク + S2J Webinar に差し替え |
 
 ## 背景と目的
 

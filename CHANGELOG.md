@@ -2,6 +2,12 @@
 
 ## unreleased
 
+## 0.0.4 - 2026-10-10
+
+### Changed
+
+* 仕様ドラフト (`docs_mod/specs.md`) の kis-event-manager 差し替え先の表記を修正
+
 ## 0.0.4 - 2026-10-08
 
 ### Changed
