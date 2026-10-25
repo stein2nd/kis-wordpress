@@ -2,6 +2,21 @@
 
 ## unreleased
 
+## 0.0.5 - 2026-10-25
+
+### Added
+
+* PHP 開発基盤 (`composer.json` / `composer.lock`、PHPUnit スモーク `tests/`、`phpunit.xml.dist`)
+* PHP 静的解析・コーディング規約の dist 設定 (`phpstan.neon.dist`、`phpcs.xml.dist`、`phpcs.wpcs.xml.dist`、`.env.tests.example`)
+
+### Changed
+
+* PHP 要件の下限を **v8.3** に統一 (他 S2J プラグインおよび [WordPress 推奨要件](https://ja.wordpress.org/about/requirements/) に合わせる)
+* GitHub Actions `phpunit.yml` を PHP v8.3 + `composer test` のみに整理 (未定義の `npm run phpunit:wp-env` を呼ばない)
+* `README.md` の PHP バッジを v8.3+ に更新
+* `npm run lint:php` 等から Composer スクリプトに PHP Lint を委譲
+* 仕様ドラフト (`docs_mod/specs.md`) の別 repo / 既存 S2J 一覧に `状態` 列を追加し、Similarity / Media Library Date Corrector / Webinar Source QR を索引に追加
+
 ## 0.0.4 - 2026-10-11
 
 ### Changed

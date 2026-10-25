@@ -84,11 +84,15 @@ flowchart TD
 
 ## 関連リポジトリ
 
-本 repo は [kis-wordpress](https://github.com/stein2nd/kis-wordpress.git)。テーマは [kis2026_base](https://github.com/stein2nd/kis2026_base.git) (見た目、FSE)。テーマ側 [§1.5 依存プラグイン](https://github.com/stein2nd/kis2026_base/blob/main/docs/spec.md) は索引で、詳細の正は本書。実装はロードマップ順であり、8本を今すぐ実装する前提ではない。
+本 repo は [kis-wordpress](https://github.com/stein2nd/kis-wordpress.git) です。
+
+テーマは [kis2026_base](https://github.com/stein2nd/kis2026_base.git) で、見た目と、FSE を担当します。テーマ側 [§1.5 依存プラグイン](https://github.com/stein2nd/kis2026_base/blob/main/docs/spec.md) は索引で、詳細の正は本書です。
+
+実装はロードマップ順であり、8本を今すぐ実装する前提ではありません。
 
 ### 本モノレポが当面管理するプラグイン
 
-Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` に置く。データモデル等の詳細は [プラグイン一覧と責務](#プラグイン一覧と責務)。
+Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` に置きます。データモデル等の詳細は [プラグイン一覧と責務](#プラグイン一覧と責務)。
 
 | プラグイン | 担当 | Phase |
 | --- | --- | --- |
@@ -103,31 +107,38 @@ Phase-0〜1 (必要なら Phase-2の kis-inquiry 完成まで) は `plugins/` �
 
 ### 別リポジトリ (汎用・サービス)
 
-横断機能の Composer ライブラリは **S2J プロダクトとして別 repo** に切り出しました。仕様の正は各 repo の `docs_mod/service_spec.md` です。下記は各サービスの仕様確定と実装、その後に呼び出し側プラグインの仕様です。`s2j-site-policy-manager` は最初から別 repo です。製品方針は当該 repo の `docs_mod/product-direction.md` を参照します。詳細は [横断機能 (S2J プロダクト)](#横断機能-s2j-プロダクト)。
+横断機能の Composer ライブラリは **S2J プロダクトとして別 repo** に切り出しました。仕様の正は各 repo の `docs_mod/service_spec.md` です。下記は各サービスの仕様確定と実装、その後に呼び出し側プラグインの仕様です。
+
+`s2j-site-policy-manager` は最初から別 repo です。製品方針は当該 repo の `docs_mod/product-direction.md` をご覧ください。詳細は [横断機能 (S2J プロダクト)](#横断機能-s2j-プロダクト)。
+
+`状態` はエコシステム上の段階の目安です。**実装テスト** の進捗の正は、各 repo の `docs/status.md` (機能一覧、100% 完了条件チェックリスト) です。
 
 | 名称 | 種別 | リポジトリ | 備考 | 状態 |
 | --- | --- | --- | --- | --- |
-| **S2J Site Policy Manager** | WP プラグイン | [s2j-site-policy-manager](https://github.com/stein2nd/s2j-site-policy-manager.git) | ポリシー台帳。KIS は個人情報の保護方針と情報セキュリティ基本方針。旧称 S2J Legal | 方向性メモ |
-| **S2J Content Dates** | WP プラグイン | [s2j-content-dates](https://github.com/stein2nd/s2j-content-dates.git) | 公開日と更新日の表示。仕様は [specs.md](https://github.com/stein2nd/s2j-content-dates/blob/main/docs_mod/specs.md) | 仕様ドラフト |
-| **S2J Content Dates Service** | Composer サービス | [s2j-content-dates-service](https://github.com/stein2nd/s2j-content-dates-service.git) | 公開日・更新日の算出 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-content-dates-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
-| **S2J Query Pinned** | WP プラグイン | [s2j-query-pinned](https://github.com/stein2nd/s2j-query-pinned.git) | 一覧の先頭にピン留めを置く。仕様は [specs.md](https://github.com/stein2nd/s2j-query-pinned/blob/main/docs_mod/specs.md) | 仕様ドラフト |
-| **S2J Query Pinned Service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service.git) | ピン優先 + 残り N 件の組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-query-pinned-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
-| **S2J Inquiry Destination** | WP プラグイン | [s2j-inquiry-destination](https://github.com/stein2nd/s2j-inquiry-destination.git) | 問い合わせの送信先。フォームは Snow Monkey Forms。仕様は [specs.md](https://github.com/stein2nd/s2j-inquiry-destination/blob/main/docs_mod/specs.md) | 仕様ドラフト |
-| **S2J Inquiry Destination Service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service.git) | 問い合わせ送信先のコンセント変換 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-inquiry-destination-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
-| **S2J Video Publisher** | WP プラグイン | [s2j-video-publisher](https://github.com/stein2nd/s2j-video-publisher.git) | YouTube の限定公開の公開期間。仕様は [specs.md](https://github.com/stein2nd/s2j-video-publisher/blob/main/docs_mod/specs.md) | 仕様ドラフト |
-| **S2J Video Publisher Service** | Composer サービス | [s2j-video-publisher-service](https://github.com/stein2nd/s2j-video-publisher-service.git) | 限定公開の公開期間のリクエスト組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-video-publisher-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
-| **S2J Webinar** | WP プラグイン | [s2j-webinar](https://github.com/stein2nd/s2j-webinar.git) | [GatherPress](https://github.com/GatherPress/gatherpress) のコンパニオン。イベント UI は [フォーク版 GatherPress](https://github.com/stein2nd/gatherpress)。仕様は [specs.md](https://github.com/stein2nd/s2j-webinar/blob/main/docs_mod/specs.md) | 仕様ドラフト |
-| **S2J Webinar Service** | Composer サービス | [s2j-webinar-service](https://github.com/stein2nd/s2j-webinar-service.git) | Zoom Webinar のリクエスト組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-webinar-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
-| **S2J Webinar Survey** | WP プラグイン | [s2j-webinar-survey](https://github.com/stein2nd/s2j-webinar-survey.git) | ウェビナーのアンケート設問。仕様は [specs.md](https://github.com/stein2nd/s2j-webinar-survey/blob/main/docs_mod/specs.md) | 仕様ドラフト |
-| **S2J Webinar Survey Service** | Composer サービス | [s2j-webinar-survey-service](https://github.com/stein2nd/s2j-webinar-survey-service.git) | 設問文書の検査と助言、下書きの依頼文 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-webinar-survey-service/blob/main/docs_mod/service_spec.md) | 仕様ドラフト |
+| **S2J Site Policy Manager** | WP プラグイン | [s2j-site-policy-manager](https://github.com/stein2nd/s2j-site-policy-manager) | ポリシー台帳。KIS は個人情報の保護方針と情報セキュリティ基本方針。旧称 S2J Legal | 仕様メモ (未決あり) |
+| **S2J Content Dates** | WP プラグイン | [s2j-content-dates](https://github.com/stein2nd/s2j-content-dates) | 公開日と更新日の表示。仕様は [specs.md](https://github.com/stein2nd/s2j-content-dates/blob/main/docs_mod/specs.md) | 仕様メモ |
+| **S2J Content Dates Service** | Composer サービス | [s2j-content-dates-service](https://github.com/stein2nd/s2j-content-dates-service) | 公開日・更新日の算出 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-content-dates-service/blob/main/docs_mod/service_spec.md) | 仕様メモ |
+| **S2J Query Pinned** | WP プラグイン | [s2j-query-pinned](https://github.com/stein2nd/s2j-query-pinned) | 一覧の先頭にピン留めを置く。仕様は [specs.md](https://github.com/stein2nd/s2j-query-pinned/blob/main/docs_mod/specs.md) | 仕様メモ |
+| **S2J Query Pinned Service** | Composer サービス | [s2j-query-pinned-service](https://github.com/stein2nd/s2j-query-pinned-service) | ピン優先 + 残り N 件の組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-query-pinned-service/blob/main/docs_mod/service_spec.md) | 仕様メモ |
+| **S2J Inquiry Destination** | WP プラグイン | [s2j-inquiry-destination](https://github.com/stein2nd/s2j-inquiry-destination) | 問い合わせの送信先。フォームは Snow Monkey Forms。進捗は [status.md](https://github.com/stein2nd/s2j-inquiry-destination/blob/main/docs/status.md) | 実装テスト (Unit/CI 済、手動と HTTPS 待ち) |
+| **S2J Inquiry Destination Service** | Composer サービス | [s2j-inquiry-destination-service](https://github.com/stein2nd/s2j-inquiry-destination-service) | 問い合わせ送信先のコンセント変換 (WP 非依存)。進捗は [status.md](https://github.com/stein2nd/s2j-inquiry-destination-service/blob/main/docs/status.md) | 実装テスト (プラグイン組込済、SaaS E2E 待ち) |
+| **S2J Video Publisher** | WP プラグイン | [s2j-video-publisher](https://github.com/stein2nd/s2j-video-publisher) | YouTube の限定公開の公開期間。仕様は [specs.md](https://github.com/stein2nd/s2j-video-publisher/blob/main/docs_mod/specs.md) | 仕様メモ |
+| **S2J Video Publisher Service** | Composer サービス | [s2j-video-publisher-service](https://github.com/stein2nd/s2j-video-publisher-service) | 限定公開の公開期間のリクエスト組立 (WP 非依存)。仕様は [service_spec.md](https://github.com/stein2nd/s2j-video-publisher-service/blob/main/docs_mod/service_spec.md) | 仕様メモ |
+| **S2J Similarity Service** | Composer サービス | [s2j-similarity-service](https://github.com/stein2nd/s2j-similarity-service) | 類似度算出 (WP 非依存)。[S2J Slug Generater](https://github.com/stein2nd/s2j-slug-generater) が利用。進捗は [status.md](https://github.com/stein2nd/s2j-similarity-service/blob/main/docs/status.md) | 実装テスト |
+| **S2J Media Library Date Corrector** | WP プラグイン | [s2j-media-library-date-corrector](https://github.com/stein2nd/s2j-media-library-date-corrector) | メディアライブラリの日付補正。進捗は [status.md](https://github.com/stein2nd/s2j-media-library-date-corrector/blob/main/docs/status.md) | 実装テスト (Local 主、結合と E2E 残) |
+| **S2J Webinar** | WP プラグイン | [s2j-webinar](https://github.com/stein2nd/s2j-webinar) | [GatherPress](https://github.com/GatherPress/gatherpress) のコンパニオン。イベント UI は [フォーク版 GatherPress](https://github.com/stein2nd/gatherpress)。進捗は [status.md](https://github.com/stein2nd/s2j-webinar/blob/main/docs/status.md) | 実装テスト (Local 約100%、Zoom HTTPS 待ち) |
+| **S2J Webinar Service** | Composer サービス | [s2j-webinar-service](https://github.com/stein2nd/s2j-webinar-service) | Zoom Webinar のリクエスト組立 (WP 非依存)。進捗は [status.md](https://github.com/stein2nd/s2j-webinar-service/blob/main/docs/status.md) | 実装テスト (Webinar 連携、HTTPS 待ち) |
+| **S2J Webinar Source QR** | WP プラグイン | [s2j-webinar-source-qr](https://github.com/stein2nd/s2j-webinar-source-qr) | ソース追跡 QR。Webinar コンパニオン。進捗は [status.md](https://github.com/stein2nd/s2j-webinar-source-qr/blob/main/docs/status.md) | 実装テスト (Local 約100%、HTTPS 残) |
+| **S2J Webinar Survey** | WP プラグイン | [s2j-webinar-survey](https://github.com/stein2nd/s2j-webinar-survey) | ウェビナーのアンケート設問。進捗は [status.md](https://github.com/stein2nd/s2j-webinar-survey/blob/main/docs/status.md) | 実装テスト (Local 約100%、Webinar attach 待ち) |
+| **S2J Webinar Survey Service** | Composer サービス | [s2j-webinar-survey-service](https://github.com/stein2nd/s2j-webinar-survey-service) | 設問文書の検査と助言、下書きの依頼文 (WP 非依存)。進捗は [status.md](https://github.com/stein2nd/s2j-webinar-survey-service/blob/main/docs/status.md) | 実装テスト (Local 約100%、attach 待ち) |
 
 ### 既存 S2J プラグイン (連携)
 
-| プラグイン | 本モノレポでの用途 |
-| --- | --- |
-| [S2J Alliance Manager](https://github.com/stein2nd/s2j-alliance-manager.git) | トップ / reason のアイコンパレード (ブロック + ショートコード) |
-| [S2J Slug Generater](https://github.com/stein2nd/s2j-slug-generater.git) | 新 CPT のスラッグ生成 ([S2J Similarity Service](https://github.com/stein2nd/s2j-similarity-service.git) 利用) |
-| [kis-event-manager](https://github.com/yuki-530/kis-event-manager.git) | 現行イベント。段階的に GatherPress フォーク + S2J Webinar に差し替え |
+| プラグイン | 本モノレポでの用途 | 状態 |
+| --- | --- | --- |
+| [S2J Alliance Manager](https://github.com/stein2nd/s2j-alliance-manager) | トップ / reason のアイコンパレード (ブロック + ショートコード) | 実装テスト (約97%、次版 CPT 仕様検討) |
+| [S2J Slug Generater](https://github.com/stein2nd/s2j-slug-generater) | 新 CPT のスラッグ生成 ([S2J Similarity Service](https://github.com/stein2nd/s2j-similarity-service) 利用) | 実装テスト |
+| [kis-event-manager](https://github.com/yuki-530/kis-event-manager) | 現行イベント。段階的に GatherPress フォーク + S2J Webinar に差し替え | 本番 (移行予定) |
 
 ## 背景と目的
 
@@ -423,6 +434,7 @@ docs/                              # 確定後
 | 2026-10-04 | S2J Query Pinned の仕様ドラフトを索引に加えた |
 | 2026-10-04 | S2J Inquiry Destination の仕様ドラフトを索引に加えた |
 | 2026-10-06 | S2J Webinar Survey と S2J Webinar Survey Service の仕様ドラフトを索引に加えた |
+| 2026-10-25 | 別 repo 一覧の `状態` を更新。Similarity / Media Library Date Corrector / Webinar Source QR を索引に加えた |
 
 ## 付録 A: コンテンツマップ (サイト IA)
 

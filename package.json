@@ -1,38 +1,50 @@
 {
-  "name": "kis-wordpress",
-  "version": "0.0.4",
-  "description": "KIS WordPress plugin monorepo",
-  "license": "GPL-3.0-or-later",
-  "author": "Koutarou ISHIKAWA",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/stein2nd/kis-wordpress.git"
-  },
-  "homepage": "https://github.com/stein2nd/kis-wordpress#readme",
-  "bugs": {
-    "url": "https://github.com/stein2nd/kis-wordpress/issues"
-  },
-  "keywords": [],
-  "workspaces": [],
-  "directories": {},
-  "files": [],
-  "main": "",
-  "scripts": {
-    "lint:docs": "s2j-docs-linter ./README.md ./CHANGELOG.md ./docs/**/*.md ./docs_mod/**/*.md"
-  },
-  "dependencies": {
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
-  },
-  "overrides": {
-    "rollup": "^4.64.5"
-  },
-  "devDependencies": {
-    "@s2j/docs-linter": "^1.0.27",
-    "rollup": "^4.64.5",
-    "vite": "^8.3.4"
-  },
-  "allowScripts": {
-    "@s2j/docs-linter": true
-  }
+    "name": "kis-wordpress",
+    "version": "0.0.5",
+    "description": "KIS WordPress plugin monorepo",
+    "license": "GPL-3.0-or-later",
+    "author": "Koutarou ISHIKAWA",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stein2nd/kis-wordpress.git"
+    },
+    "homepage": "https://github.com/stein2nd/kis-wordpress#readme",
+    "bugs": {
+        "url": "https://github.com/stein2nd/kis-wordpress/issues"
+    },
+    "keywords": [],
+    "workspaces": [],
+    "directories": {},
+    "files": [],
+    "main": "",
+    "scripts": {
+        "lint:docs": "s2j-docs-linter ./README.md ./CHANGELOG.md ./docs/**/*.md ./docs_mod/**/*.md",
+        "lint:php": "composer lint:php",
+        "phpcs": "composer phpcs",
+        "phpstan": "composer phpstan",
+        "phpcs:wpcs": "composer phpcs:wpcs",
+        "pretest:unit:php:local": "composer install --no-interaction --prefer-dist",
+        "test:unit:php:local": "composer test",
+        "makepot": "wp i18n make-pot . languages/kis-wordpress.pot --domain=kis-wordpress",
+        "makemo": "wp i18n make-mo languages",
+        "makejson": "wp i18n make-json languages --no-purge",
+        "makei18n": "npm run makemo && npm run makejson",
+        "postbuild:production:gutenberg": "npm run makejson",
+        "pretest:lint:php": "composer install --no-interaction --prefer-dist"
+    },
+    "dependencies": {
+        "react": "^19.3.1",
+        "react-dom": "^19.3.1"
+    },
+    "overrides": {
+        "rollup": "^4.65.0"
+    },
+    "devDependencies": {
+        "@s2j/docs-linter": "^1.0.30",
+        "rollup": "^4.65.0",
+        "vite": "^8.3.5"
+    },
+    "allowScripts": {
+        "@s2j/docs-linter": true
+    }
 }
