@@ -10,7 +10,7 @@
 
 ### Changed
 
-* `makejson` を purge 既定に変更し、JED を残す場合は `makejson:keep` (`--no-purge`) を使用
+* `makejson` を purge デフォルトに変更し、JED を残す場合は `makejson:keep` (`--no-purge`) を使用
 * `.gitignore` に `languages/*-{hash}.json` (JED) をコミット対象とする旨の注記を追加
 * `pretest:unit:php:local` を `test:unit:php:local` 直前に実行するよう npm スクリプトを整理
 
