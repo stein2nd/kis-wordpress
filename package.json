@@ -23,14 +23,15 @@
         "phpcs": "composer phpcs",
         "phpstan": "composer phpstan",
         "phpcs:wpcs": "composer phpcs:wpcs",
-        "pretest:unit:php:local": "composer install --no-interaction --prefer-dist",
         "test:unit:php:local": "composer test",
         "makepot": "wp i18n make-pot . languages/kis-wordpress.pot --domain=kis-wordpress",
         "makemo": "wp i18n make-mo languages",
-        "makejson": "wp i18n make-json languages --no-purge",
+        "makejson": "wp i18n make-json languages",
+        "makejson:keep": "wp i18n make-json languages --no-purge",
         "makei18n": "npm run makemo && npm run makejson",
         "postbuild:production:gutenberg": "npm run makejson",
-        "pretest:lint:php": "composer install --no-interaction --prefer-dist"
+        "pretest:lint:php": "composer install --no-interaction --prefer-dist",
+        "pretest:unit:php:local": "composer install --no-interaction --prefer-dist"
     },
     "dependencies": {
         "react": "^19.3.1",

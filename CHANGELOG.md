@@ -2,6 +2,18 @@
 
 ## unreleased
 
+## 0.0.5 - 2026-10-26
+
+### Added
+
+* ブロック / 管理 JS 用の Vite 設定の骨格 (`vite.config.ts`)
+
+### Changed
+
+* `makejson` を purge 既定に変更し、JED を残す場合は `makejson:keep` (`--no-purge`) を使用
+* `.gitignore` に `languages/*-{hash}.json` (JED) をコミット対象とする旨の注記を追加
+* `pretest:unit:php:local` を `test:unit:php:local` 直前に実行するよう npm スクリプトを整理
+
 ## 0.0.5 - 2026-10-25
 
 ### Added
