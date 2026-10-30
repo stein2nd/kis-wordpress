@@ -2,6 +2,13 @@
 
 ## unreleased
 
+## 0.0.5 - 2026-10-30
+
+### Changed
+
+* 開発用 npm 依存を更新 (`@s2j/docs-linter` ^1.0.31、`rollup` ^4.66.0、`vite` ^8.3.5)
+* `composer.lock` を Composer v2.11の lock メタデータ形式に合わせて更新
+
 ## 0.0.5 - 2026-10-26
 
 ### Added

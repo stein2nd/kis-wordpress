@@ -38,11 +38,11 @@
         "react-dom": "^19.3.1"
     },
     "overrides": {
-        "rollup": "^4.65.0"
+        "rollup": "^4.66.0"
     },
     "devDependencies": {
-        "@s2j/docs-linter": "^1.0.30",
-        "rollup": "^4.65.0",
+        "@s2j/docs-linter": "^1.0.31",
+        "rollup": "^4.66.0",
         "vite": "^8.3.5"
     },
     "allowScripts": {
