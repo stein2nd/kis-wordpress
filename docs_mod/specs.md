@@ -53,7 +53,7 @@ flowchart TD
     subgraph InnerContents ["中身 = 関数型プログラミング (ビジネスロジック)"]
         direction TB
         r1["不変の PluginConfig / 結果レコード"]
-        r2["純粋関数 (正規化、閾値、整形、状態の写像)"]
+        r2["純粋関数 (正規化、閾値、整形、状態のマッピング)"]
         r3["パイプライン合成 (継承テンプレートの代わり)"]
     end
 

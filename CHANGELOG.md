@@ -2,6 +2,14 @@
 
 ## unreleased
 
+## 0.0.6 - 2026-11-05
+
+### Changed
+
+* 仕様ドラフト (`docs_mod/specs.md`) の「写像」を「マッピング」に修正
+* 開発用 npm 依存を更新 (`@s2j/docs-linter` ^1.0.32、`rollup` ^4.67.5、`vite` ^8.3.6)
+* 開発用 Composer 依存を更新 (`phpstan/phpstan` v2.3.5)
+
 ## 0.0.5 - 2026-10-30
 
 ### Changed
