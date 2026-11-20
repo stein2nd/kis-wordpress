@@ -1,6 +1,6 @@
 {
     "name": "kis-wordpress",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "KIS WordPress plugin monorepo",
     "license": "GPL-3.0-or-later",
     "author": "Koutarou ISHIKAWA",
@@ -38,12 +38,12 @@
         "react-dom": "^19.3.1"
     },
     "overrides": {
-        "rollup": "^4.67.5"
+        "rollup": "^4.68.7"
     },
     "devDependencies": {
-        "@s2j/docs-linter": "^1.0.32",
-        "rollup": "^4.67.5",
-        "vite": "^8.3.6"
+        "@s2j/docs-linter": "^1.0.34",
+        "rollup": "^4.68.7",
+        "vite": "^8.3.8"
     },
     "allowScripts": {
         "@s2j/docs-linter": true

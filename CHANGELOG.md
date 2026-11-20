@@ -2,6 +2,14 @@
 
 ## unreleased
 
+## 0.0.7 - 2026-11-20
+
+### Changed
+
+* GitHub Actions を Node v24対応に更新 (`actions/checkout@v5`、`actions/setup-node@v5`、`node-version: "24"`、ランナー `ubuntu-24.04`、`upload-artifact@v6`)
+* 開発用 npm 依存を更新 (`@s2j/docs-linter` ^1.0.34、`rollup` ^4.68.7、`vite` ^8.3.8)
+* 開発用 Composer 依存を更新 (`phpstan/phpstan` v2.3.7、`phpunit/phpunit` v9.6.39)
+
 ## 0.0.6 - 2026-11-05
 
 ### Changed
